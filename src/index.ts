@@ -54,7 +54,7 @@ mongoose
         });
 
         // Set up routes
-        app.use("/api/", router());
+        app.use("/", router());
 
         //enable swagger
         swaggerDocs(app, PORT);

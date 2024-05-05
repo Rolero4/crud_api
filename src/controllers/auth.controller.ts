@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { authentication, random } from "../middleware/crypto";
+import { authentication, random } from "../helpers/crypto";
 import { createUser, getUserByEmail } from "../db/users.db";
 
 export const loginController = async (req: Request, res: Response) => {

@@ -6,7 +6,7 @@ import {
     getProductByIdController,
     updateProductByIdController,
 } from "../../controllers/product.controller";
-import { validateData } from "../../middleware/validator";
+import { validateBody } from "../../middleware/bodyValidator";
 import { productSchema } from "../../schemas/product.schema";
 
 export default (router: express.Router) => {
@@ -110,7 +110,7 @@ export default (router: express.Router) => {
      *       - Products
      */
 
-    router.post("/products", validateData(productSchema), addProductController);
+    router.post("/products", validateBody(productSchema), addProductController);
 
     router.get("/products", getAllProductsController);
 
@@ -118,7 +118,7 @@ export default (router: express.Router) => {
 
     router.put(
         "/products/:id",
-        validateData(productSchema),
+        validateBody(productSchema),
         updateProductByIdController
     );
 

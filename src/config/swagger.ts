@@ -15,11 +15,12 @@ const options: SwaggerOptions = {
         tags: [
             {
                 name: "Auth",
-                description: "API for users",
+            },
+            {
+                name: "Users",
             },
             {
                 name: "Products",
-                description: "API for products",
             },
         ],
     },
@@ -31,7 +32,7 @@ const options: SwaggerOptions = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
-function swaggerDocs(app: Express, port: string) {
+const swaggerDocs = (app: Express, port: string) => {
     // Swagger page
     app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -42,6 +43,6 @@ function swaggerDocs(app: Express, port: string) {
     });
 
     console.log(`Docs available at http://localhost:${port}/docs`);
-}
+};
 
 export default swaggerDocs;

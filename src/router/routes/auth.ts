@@ -1,5 +1,5 @@
 import express from "express";
-import { validateData } from "../../middleware/validator";
+import { validateBody } from "../../middleware/bodyValidator";
 import { UserLoginSchema, UserRegisterSchema } from "../../schemas/user.schema";
 import {
     loginController,
@@ -48,9 +48,9 @@ import {
 export default (router: express.Router) => {
     router.post(
         "/auth/register",
-        validateData(UserRegisterSchema),
+        validateBody(UserRegisterSchema),
         registerController
     );
 
-    router.post("/auth/login", validateData(UserLoginSchema), loginController);
+    router.post("/auth/login", validateBody(UserLoginSchema), loginController);
 };
