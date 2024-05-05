@@ -1,11 +1,14 @@
 import express from "express";
 import { validateData } from "../../middleware/validator";
-import { UserRegisterSchema } from "../../schemas/user.schema";
-import { registerUser } from "../../controllers/auth.controller";
+import { UserLoginSchema, UserRegisterSchema } from "../../schemas/user.schema";
+import {
+    loginController,
+    registerController,
+} from "../../controllers/auth.controller";
 
 /**
  * @openapi
- * /auth:
+ * /auth/register:
  *   post:
  *     summary: Register new User
  *     description: Register new User
@@ -21,9 +24,33 @@ import { registerUser } from "../../controllers/auth.controller";
  *       500:
  *         description: Internal server error
  *     tags:
- *       - Users
+ *       - Auth
+ *
+ * /auth/login:
+ *   post:
+ *     summary: Login a User
+ *     description: Logina  User
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserLoginSchema'
+ *     responses:
+ *       200:
+ *         description: Successfully login User
+ *       500:
+ *         description: Internal server error
+ *     tags:
+ *       - Auth
  */
 
 export default (router: express.Router) => {
-    router.post("/auth", validateData(UserRegisterSchema), registerUser);
+    router.post(
+        "/auth/register",
+        validateData(UserRegisterSchema),
+        registerController
+    );
+
+    router.post("/auth/login", validateData(UserLoginSchema), loginController);
 };

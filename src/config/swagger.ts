@@ -14,7 +14,7 @@ const options: SwaggerOptions = {
         },
         tags: [
             {
-                name: "Users",
+                name: "Auth",
                 description: "API for users",
             },
             {
