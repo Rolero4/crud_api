@@ -49,3 +49,24 @@ export const addProductToUserController = async (
         return res.sendStatus(400);
     }
 };
+
+export const getUserProducts = async (req: Request, res: Response) => {
+    try {
+        const { userId } = req.params;
+        if (!userId) {
+            return res.status(400);
+        }
+
+        const products = await getUserById(userId)
+            .select("-_id products")
+            .populate({
+                path: "products",
+                select: "_id name quantity price",
+            });
+
+        return res.status(200).json(products?.products).end();
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+};

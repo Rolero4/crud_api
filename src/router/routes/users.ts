@@ -2,6 +2,7 @@ import express from "express";
 import {
     addProductToUserController,
     getAllUsersController,
+    getUserProducts,
 } from "../../controllers/users.controller";
 import { isAuthenticated } from "../../middleware/authValidator";
 import { validateBody } from "../../middleware/bodyValidator";
@@ -45,6 +46,25 @@ import { AddProductToUserSchema } from "../../schemas/user.schema";
  *         description: Internal server error
  *     tags:
  *       - Users
+ *
+ *
+ * /users/{userId}/products:
+ *   get:
+ *     summary: Get user products
+ *     description: Get user products
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully get users product list
+ *       500:
+ *         description: Internal server error
+ *     tags:
+ *       - Users
  */
 
 export default (router: express.Router) => {
@@ -56,4 +76,6 @@ export default (router: express.Router) => {
         validateBody(AddProductToUserSchema),
         addProductToUserController
     );
+
+    router.get("/users/:userId/products", isAuthenticated, getUserProducts);
 };
