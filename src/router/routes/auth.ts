@@ -1,6 +1,6 @@
 import express from "express";
 import { validateBody } from "../../middleware/bodyValidator";
-import { UserLoginSchema, UserRegisterSchema } from "../../schemas/user.schema";
+import { UserLoginSchema, UserRegisterSchema } from "../../schemas/auth.schema";
 import {
     loginController,
     registerController,

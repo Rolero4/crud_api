@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     },
     products: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
 });
-export const UserModel = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 
 export const getUsers = () => UserModel.find();
 
